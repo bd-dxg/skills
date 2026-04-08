@@ -24,13 +24,12 @@
     ]
   },
   "hooks": {
-
     "Notification": [
       {
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -File \"C:\\Users\\bddxg\\.claude\\hooks\\focus-vscode-notify.ps1\"",
+            "command": "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -File \"C:\\Users\\bddxg\\.claude\\hooks\\vscode-notify.ps1\"",
             "async": false
           }
         ]
@@ -41,7 +40,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -File \"C:\\Users\\bddxg\\.claude\\hooks\\focus-vscode-notify.ps1\"",
+            "command": "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -File \"C:\\Users\\bddxg\\.claude\\hooks\\vscode-notify.ps1\"",
             "async": false
           }
         ]
