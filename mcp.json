@@ -1,0 +1,23 @@
+{
+  "chrome-devtools-mcp": {
+    "args": [
+      "-y",
+      "chrome-devtools-mcp@latest",
+      "--no-usage-statistics",
+      "--autoConnect"
+    ],
+    "command": "npx"
+  },
+  "exa": {
+    "headers": {},
+    "type": "http",
+    "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,get_code_context_exa,crawling_exa,company_research_exa,linkedin_search_exa,deep_researcher_start,deep_researcher_check"
+  },
+  "fetch": {
+    "headers": {
+      "Authorization": "Bearer 申请密钥"
+    },
+    "type": "sse",
+    "url": "https://mcp.api-inference.modelscope.net/f4df7cc310fa47/sse"
+  }
+}
