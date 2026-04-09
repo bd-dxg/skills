@@ -41,6 +41,10 @@
 - **skill-creator**：用于创建新的 Claude Code skill，辅助生成所需结构与内容。
 - **typescript-lsp**：提供 TypeScript 语言服务相关能力，便于处理类型信息、符号定位与代码理解。
 
+#### hello2cc
+
+- **hello2cc**：让第三方模型在 Claude Code 里尽量按 Opus 一样思考、运行、选工具和输出。仓库地址：<https://github.com/hellowind777/hello2cc>
+
 #### vue-skills
 
 - **vue-best-practices**：Vue 通用最佳实践，覆盖 Vue 3、Composition API、`<script setup>`、TypeScript 等推荐用法。
