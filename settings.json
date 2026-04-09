@@ -1,1 +1,72 @@
-C:/Users/bddxg/.claude/settings.json
+{
+  "env": {
+    "ANTHROPIC_AUTH_TOKEN": "PROXY_MANAGED",
+    "ANTHROPIC_BASE_URL": "http://127.0.0.1:15721",
+    "API_TIMEOUT_MS": "3000000",
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": "0",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1",
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "DISABLE_AUTOUPDATER": "1",
+    "DISABLE_INSTALLATION_CHECKS": "1",
+    "ENABLE_TOOL_SEARCH": "true"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx vue-tsc --noEmit)",
+      "mcp__fetch__fetch",
+      "mcp__chrome-devtools__list_pages",
+      "mcp__chrome-devtools__take_snapshot",
+      "Read",
+      "Bash(git diff --cached --name-only && echo*)"
+    ],
+    "deny": [
+      "WebSearch",
+      "WebFetch"
+    ]
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -File \"C:\\Users\\bddxg\\.claude\\hooks\\focus-vscode-notify.ps1\"",
+            "async": false
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden -File \"C:\\Users\\bddxg\\.claude\\hooks\\focus-vscode-notify.ps1\"",
+            "async": false
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "ccline",
+    "padding": 0
+  },
+  "extraKnownMarketplaces": {
+    "hello2cc-local": {
+      "source": {
+        "source": "github",
+        "repo": "hellowind777/hello2cc"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "hello2cc@hello2cc-local": true
+  }
+}
