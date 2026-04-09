@@ -85,6 +85,10 @@ skills/
 
 存放自动化 hook 脚本，用于在特定时机执行预设动作，例如辅助检查、流程提示或工作流联动。
 
+#### 当前包含的 hooks
+
+- **vscode-notify.ps1**：Windows 系统下的 VSCode 通知脚本，当 Claude Code 需要用户交互时（如权限确认、问题回答等），通过 Windows Toast 通知提醒用户。
+
 ### `rules/`
 
 存放规则文件，用于约束 Claude Code 的输出风格、代码规范与执行习惯。

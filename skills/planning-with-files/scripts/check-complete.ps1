@@ -1,4 +1,4 @@
-﻿# Check if all phases in Task/task_plan.md are complete
+# Check if all phases in Task/task_plan.md are complete
 # Always exits 0 -- uses stdout for status reporting
 # Used by Stop hook to report task completion status
 

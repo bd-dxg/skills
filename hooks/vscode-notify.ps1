@@ -19,13 +19,14 @@ function Get-NotificationMessage {
   param([string]$EventName)
 
   $messages = @{
-    permission_prompt = '需要你确认权限请求'
-    idle_prompt = 'Claude Code 正在等待你的输入'
+    permission_prompt = '请确认权限请求'
+    idle_prompt = 'Claude 正在等待你的输入'
     elicitation_dialog = '有交互需要你确认'
     ask_user_question = '需要你回答一个问题'
     user_prompt_submit = '需要你回答问题'
     ask_user_question_complete = '问题已回答'
     permission_request = '需要你确认权限请求'
+    stop='Claude 已回答完毕,请指示!'
   }
 
   $message = $messages[$EventName]

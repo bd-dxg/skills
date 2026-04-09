@@ -14,15 +14,9 @@
 - 函数：优先箭头函数，顶层工具函数可用具名函数声明
 - 对象：使用简写、解构、可选链（`?.`）、空值合并（`??`）
 - 模块：ES Module（`import/export`），禁止 CommonJS（配置文件除外）
-- 异步：`async/await`，并发用 `Promise.all`，禁止 `.then().catch()` 链式
+- 异步：`async/await`，并发用 `Promise.allSettled`，禁止 `.then().catch()` 链式
 - TypeScript：`interface` 描述对象结构，`type` 用于联合/交叉类型，禁止 `any`（用 `unknown` 替代）
 
-## Vue 3
-
-- 组件：`<script setup lang="ts">` + Composition API，禁止 Options API
-- 响应式：`ref` 用于原始值，`reactive` 用于对象
-- 模板：`v-if` 和 `v-for` 不同层级，`v-for` 必须加 `key`，禁止模板内复杂逻辑
-- 组合式函数：`use` 前缀，放 `composables/` 目录
 
 ## 命名规范
 

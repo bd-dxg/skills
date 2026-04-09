@@ -1,4 +1,4 @@
-﻿# planning-with-files: 会话补全脚本（PowerShell）
+# planning-with-files: 会话补全脚本（PowerShell）
 # 分析上一次会话，在最后一次 planning 文件更新之后，提取尚未同步到文件的上下文。
 # 设计用于 SessionStart hook。
 # 用法: .\session-catchup.ps1 [project-path]
