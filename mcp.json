@@ -15,7 +15,7 @@
   },
   "fetch": {
     "headers": {
-      "Authorization": "Bearer 申请密钥"
+      "Authorization": "Bearer 申请密钥https://www.modelscope.cn/my/access/token"
     },
     "type": "sse",
     "url": "https://mcp.api-inference.modelscope.net/f4df7cc310fa47/sse"
