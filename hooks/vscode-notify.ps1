@@ -1,6 +1,6 @@
 ﻿param()
 
-$logPath = 'C:\Users\bddxg\.claude\hooks\hook-log.txt'
+$logPath = "$Home\.claude\hooks\hook-log.txt"
 
 function Write-HookLog {
   param(
@@ -26,7 +26,7 @@ function Get-NotificationMessage {
     user_prompt_submit = '需要你回答问题'
     ask_user_question_complete = '问题已回答'
     permission_request = '需要你确认权限请求'
-    stop='Claude 已回答完毕,请指示!'
+    stop = 'Claude 已回答完毕,请指示!'
   }
 
   $message = $messages[$EventName]

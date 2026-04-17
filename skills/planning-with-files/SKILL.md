@@ -8,16 +8,16 @@ hooks:
     - matcher: "Write|Edit|Bash|Read|Glob|Grep"
       hooks:
         - type: command
-          command: "cat Task/task_plan.md 2>/dev/null | head -30 || true"
+          command: "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"if (Test-Path 'Task/task_plan.md') { Get-Content 'Task/task_plan.md' -TotalCount 30 } else { Write-Host '[planning-with-files] No task plan found' }\" 2>/dev/null || echo '[planning-with-files] Pre-tool check skipped'"
   PostToolUse:
     - matcher: "Write|Edit"
       hooks:
         - type: command
-          command: "echo '[planning-with-files] File updated. If this completes a phase, update Task/task_plan.md status.'"
+          command: "powershell.exe -NoProfile -ExecutionPolicy Bypass -Command \"Write-Host '[planning-with-files] File updated. If this completes a phase, update Task/task_plan.md status.'\" 2>/dev/null || echo '[planning-with-files] File updated. If this completes a phase, update Task/task_plan.md status.'"
   Stop:
     - hooks:
         - type: command
-          command: "SD=\"${CLAUDE_PLUGIN_ROOT:-$HOME/.claude/plugins/planning-with-files}/scripts\"; powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$SD/check-complete.ps1\" 2>/dev/null || sh \"$SD/check-complete.sh\""
+          command: "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$env:USERPROFILE\\.claude\\skills\\planning-with-files\\scripts\\check-complete.ps1\" 2>/dev/null || echo '[planning-with-files] Task completion check skipped'"
 metadata:
   version: "2.21.0"
 ---

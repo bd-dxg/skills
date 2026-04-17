@@ -36,18 +36,20 @@
 
 ### 开发新功能
 
-1. **理解需求**（必要时使用 AskUserQuestion 澄清）
-2. **规划**（复杂功能使用技能 `/planning-with-files`) 
-3. **代码审查**（code-review-expert 自动触发）
+1. **规划**（复杂功能使用 `/planning-with-files`）
+2. **编码实现**
+3. **代码审查**（自动触发 `/code-review-expert`）
+4. **安全审查**（涉及敏感数据时触发 `/security-review`）
+5. **提交代码**（使用 `/gencom`）
 
 
 ### 复杂功能/架构变更
 
-1. **规划阶段**（使用技能 `/planning-with-files` 生成实施计划）
+1. **规划阶段**（使用 `/planning-with-files` 生成实施计划）
 2. **用户确认**计划后再开始编码
 3. **分阶段实现**
-4. **全面审查**（code-review-expert + security-reviewer）
-5. **提交代码** `/gencom`
+4. **全面审查**（`/code-review-expert` + `/security-review`）
+5. **提交代码**（使用 `/gencom`）
 
 ## 代理使用规则
 
@@ -56,7 +58,7 @@
 | 代理 | 触发条件 | 触发时机 | 优先级 |
 |------|---------|---------|--------|
 | **/code-review-expert** | 写完任何代码 | 立即 | 必须 |
-| **/security-reviewer** | 涉及认证/用户输入/API/敏感数据 | 提交前 | 必须 |
+| **/security-review** | 涉及认证/用户输入/API/敏感数据 | 提交前 | 必须 |
 | **/planning-with-files** | 复杂功能/大型重构 | 编码前 | 推荐 |
 
 ## 高频工具速查
@@ -102,10 +104,10 @@
 ### chrome-devtools（浏览器自动化）
 
 **功能：**
-- 浏览器自动化测试
-- 性能分析和 Core Web Vitals 测量
-- 页面截图和快照
-- 网络请求监控
+- **页面测试**：自动化测试、表单填写、点击操作
+- **性能分析**：Lighthouse 审计、性能追踪、Core Web Vitals 测量
+- **调试辅助**：控制台消息监控、网络请求分析
+- **页面操作**：截图、快照、元素检查
 
 ## 工作原则
 
