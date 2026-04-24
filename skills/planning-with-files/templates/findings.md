@@ -1,95 +1,95 @@
-# Findings & Decisions
+# 发现与决策
 <!-- 
-  WHAT: Your knowledge base for the task. Stores everything you discover and decide.
-  WHY: Context windows are limited. This file is your "external memory" - persistent and unlimited.
-  WHEN: Update after ANY discovery, especially after 2 view/browser/search operations (2-Action Rule).
+  WHAT: 任务的知识库。存储所有发现和决策。
+  WHY: 上下文窗口有限。这个文件是你的"外部记忆" - 持久且无限制。
+  WHEN: 在任何发现后更新，特别是在2次查看/浏览器/搜索操作后（2-Action规则）。
 -->
 
-## Requirements
+## 需求
 <!-- 
-  WHAT: What the user asked for, broken down into specific requirements.
-  WHY: Keeps requirements visible so you don't forget what you're building.
-  WHEN: Fill this in during Phase 1 (Requirements & Discovery).
-  EXAMPLE:
-    - Command-line interface
-    - Add tasks
-    - List all tasks
-    - Delete tasks
-    - Python implementation
+  WHAT: 用户要求的内容，分解为具体需求。
+  WHY: 保持需求可见，以免忘记正在构建什么。
+  WHEN: 在第1阶段（需求与发现）填写。
+  示例:
+    - 命令行界面
+    - 添加任务
+    - 列出所有任务
+    - 删除任务
+    - Python实现
 -->
-<!-- Captured from user request -->
+<!-- 从用户请求中捕获 -->
 -
 
-## Research Findings
+## 研究发现
 <!-- 
-  WHAT: Key discoveries from web searches, documentation reading, or exploration.
-  WHY: Multimodal content (images, browser results) doesn't persist. Write it down immediately.
-  WHEN: After EVERY 2 view/browser/search operations, update this section (2-Action Rule).
-  EXAMPLE:
-    - Python's argparse module supports subcommands for clean CLI design
-    - JSON module handles file persistence easily
-    - Standard pattern: python script.py <command> [args]
+  WHAT: 从网络搜索、文档阅读或探索中获得的关键发现。
+  WHY: 多模态内容（图像、浏览器结果）不会持久保存。立即写下来。
+  WHEN: 在每2次查看/浏览器/搜索操作后，更新此部分（2-Action规则）。
+  示例:
+    - Python的argparse模块支持子命令，用于清晰的CLI设计
+    - JSON模块轻松处理文件持久化
+    - 标准模式: python script.py <command> [args]
 -->
-<!-- Key discoveries during exploration -->
+<!-- 探索期间的关键发现 -->
 -
 
-## Technical Decisions
+## 技术决策
 <!-- 
-  WHAT: Architecture and implementation choices you've made, with reasoning.
-  WHY: You'll forget why you chose a technology or approach. This table preserves that knowledge.
-  WHEN: Update whenever you make a significant technical choice.
-  EXAMPLE:
-    | Use JSON for storage | Simple, human-readable, built-in Python support |
-    | argparse with subcommands | Clean CLI: python todo.py add "task" |
+  WHAT: 你做出的架构和实现选择，包含推理过程。
+  WHY: 你会忘记为什么选择某项技术或方法。这个表格保存了这些知识。
+  WHEN: 每当做出重大技术选择时更新。
+  示例:
+    | 使用JSON存储 | 简单、人类可读、内置Python支持 |
+    | 带子命令的argparse | 清晰的CLI: python todo.py add "task" |
 -->
-<!-- Decisions made with rationale -->
+<!-- 带有理由的决策 -->
 | Decision | Rationale |
 |----------|-----------|
 |          |           |
 
-## Issues Encountered
+## 遇到的问题
 <!-- 
-  WHAT: Problems you ran into and how you solved them.
-  WHY: Similar to errors in Task/task_plan.md, but focused on broader issues (not just code errors).
-  WHEN: Document when you encounter blockers or unexpected challenges.
-  EXAMPLE:
-    | Empty file causes JSONDecodeError | Added explicit empty file check before json.load() |
+  WHAT: 遇到的问题以及如何解决它们。
+  WHY: 类似于Task/task_plan.md中的错误，但侧重于更广泛的问题（不仅仅是代码错误）。
+  WHEN: 遇到阻塞或意外挑战时记录。
+  示例:
+    | 空文件导致JSONDecodeError | 在json.load()前添加显式的空文件检查 |
 -->
-<!-- Errors and how they were resolved -->
+<!-- 错误及其解决方法 -->
 | Issue | Resolution |
 |-------|------------|
 |       |            |
 
-## Resources
+## 资源
 <!-- 
-  WHAT: URLs, file paths, API references, documentation links you've found useful.
-  WHY: Easy reference for later. Don't lose important links in context.
-  WHEN: Add as you discover useful resources.
-  EXAMPLE:
-    - Python argparse docs: https://docs.python.org/3/library/argparse.html
-    - Project structure: src/main.py, src/utils.py
+  WHAT: 找到的有用的URL、文件路径、API参考、文档链接。
+  WHY: 便于后续参考。不要在上下文中丢失重要链接。
+  WHEN: 发现有用资源时添加。
+  示例:
+    - Python argparse文档: https://docs.python.org/3/library/argparse.html
+    - 项目结构: src/main.py, src/utils.py
 -->
-<!-- URLs, file paths, API references -->
+<!-- URL、文件路径、API参考 -->
 -
 
-## Visual/Browser Findings
+## 视觉/浏览器发现
 <!-- 
-  WHAT: Information you learned from viewing images, PDFs, or browser results.
-  WHY: CRITICAL - Visual/multimodal content doesn't persist in context. Must be captured as text.
-  WHEN: IMMEDIATELY after viewing images or browser results. Don't wait!
-  EXAMPLE:
-    - Screenshot shows login form has email and password fields
-    - Browser shows API returns JSON with "status" and "data" keys
+  WHAT: 从查看图像、PDF或浏览器结果中获得的信息。
+  WHY: 关键 - 视觉/多模态内容不会在上下文中持久保存。必须立即捕获为文本。
+  WHEN: 查看图像或浏览器结果后立即更新。不要等待！
+  示例:
+    - 截图显示登录表单有邮箱和密码字段
+    - 浏览器显示API返回带有"status"和"data"键的JSON
 -->
-<!-- CRITICAL: Update after every 2 view/browser operations -->
-<!-- Multimodal content must be captured as text immediately -->
+<!-- 关键: 每2次查看/浏览器操作后更新 -->
+<!-- 多模态内容必须立即捕获为文本 -->
 -
 
 ---
 <!-- 
-  REMINDER: The 2-Action Rule
-  After every 2 view/browser/search operations, you MUST update this file.
-  This prevents visual information from being lost when context resets.
+  提醒: 2-Action规则
+  每2次查看/浏览器/搜索操作后，你必须更新此文件。
+  这可以防止上下文重置时视觉信息丢失。
 -->
-*Update this file after every 2 view/browser/search operations*
-*This prevents visual information from being lost*
+*每2次查看/浏览器/搜索操作后更新此文件*
+*这可以防止视觉信息丢失*

@@ -43,6 +43,22 @@
 - ❌ `git reset` - 用户手动执行
 - ❌ `git checkout` - 用户手动执行
 
+### 2b. GitHub 操作（有限允许）
+
+**允许的 Bash 命令（读写，需确认写入操作）：**
+- ✅ `gh pr list/view/review` - PR 查看与审查
+- ✅ `gh pr create/merge/close` - PR 管理（写入需用户确认）
+- ✅ `gh issue list/view` - Issue 查看
+- ✅ `gh issue create/close` - Issue 管理（写入需用户确认）
+- ✅ `gh repo view` - 仓库信息查看
+- ✅ `gh search` - GitHub 搜索
+- ✅ `gh api` - GitHub API 直接调用
+- ✅ `gh run view` - CI/CD 状态查看
+
+**使用规范：**
+- 只读操作（list、view、search）可直接执行
+- 写入操作（create、merge、close、delete）需用户确认
+
 ### 3. 构建/测试命令（有限允许）
 
 **允许的 Bash 命令：**
@@ -64,8 +80,9 @@
 ### 优先级顺序
 1. **专用工具**（Read、Write、Edit、Glob、Grep）
 2. **只读 Git 命令**（有限允许）
-3. **构建/测试命令**（有限允许，需确认）
-4. **用户手动执行**（复杂或危险操作）
+3. **GitHub 操作**（只读直接执行，写入需确认）
+4. **构建/测试命令**（有限允许，需确认）
+5. **用户手动执行**（复杂或危险操作）
 
 ### 验证机制
 每次工具调用前必须自问：

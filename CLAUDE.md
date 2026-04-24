@@ -6,6 +6,8 @@
 - **操作系统**: Windows 11
 - **AI终端**: Git Bash (MSYS2)
 - **用户终端**: PowerShell
+- **环境限制**: 没有 Python 环境，避免使用 Python 相关命令
+- **已安装 CLI**: 系统已安装 GitHub CLI（`gh`），涉及 GitHub 仓库操作时可以使用
 
 ## 权限
 
@@ -13,20 +15,29 @@
 
 ## 命令执行策略
 
-### 1. 文件操作（绝对优先）
+### 1. 工具使用强制规则（绝对优先）
 
-**必须使用专用工具：** Read、Write、Edit、Glob、Grep
+**必须遵守 `~/.claude/rules/tool-usage.md` 中的规定：**
+
+- **文件操作**：必须使用专用工具（Read、Write、Edit、Glob、Grep）
+- **Git 操作**：只允许只读命令（status、log、diff、branch、show、blame）
+- **构建/测试**：有限允许（tsc、vue-tsc）
+- **系统命令**：绝对禁止（rm、cp、mv、curl 等）
+
+**详细规则见：** [工具使用强制规则](~/.claude/rules/tool-usage.md)
 
 ### 2. 开发工具命令（AI 自动执行）
 
 **✅ 适用场景：**
 - Git 只读：`git status/log/diff/branch/show/blame`
+- GitHub 仓库操作：`gh pr/issue/repo/search` 等 `gh` 命令
 - 类型检查：`npx tsc --noEmit`、`npx vue-tsc --noEmit`
 
 
 **❌ 禁止场景：**
 - 交互式命令：文本编辑器、交互式安装向导
 - 系统管理：需要管理员权限的操作
+- **文件操作命令**：find、grep、cat、echo 等（必须使用专用工具）
 
 ### 3. 系统命令（提供给用户执行）
 
@@ -75,11 +86,13 @@
 **工具选择：**
 - **list_*** 工具：分页检索所有项（issues、PRs、branches）
 - **search_*** 工具：关键词查询、复杂过滤条件
+- **gh CLI**：MCP 工具无法满足时，使用 `gh` 命令作为补充（如创建 PR、查看 CI 状态等）
 
 **使用规范：**
 - 必须先调用 `get_me` 了解当前用户权限
 - 使用 `sort` 和 `order` 参数排序，不要在查询字符串中包含 `sort:` 语法
 - 查询字符串只包含搜索条件（如 `org:google language:python`）
+- `gh` 命令需确认后执行写入操作（create、delete、merge 等）
 
 ### exa（AI 搜索，优先用于获取最新信息）
 
