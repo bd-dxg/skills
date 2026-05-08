@@ -111,6 +111,8 @@ Claude Code 的本地配置入口，用于注册 hooks、rules 以及其他个�
 > `mcp.json` 通常不是直接给仓库本身加载的，而是作为**示例配置**使用。
 >
 > 实际使用时，应将其中需要的 MCP 配置合并到用户本机的 `~/.claude.json` 中，再由 Claude Code 统一读取。
+> 
+> `settings.json` 中的hook配置同理,需配置为适合自己的路径
 
 > [!WARNING]
 > 如果某些 MCP 需要密钥、认证头或本地环境差异，建议在 `~/.claude.json` 中按自己的实际情况进行调整，不要直接照搬示例内容。
@@ -137,3 +139,4 @@ Claude Code 的本地配置入口，用于注册 hooks、rules 以及其他个�
 ## License
 
 本仓库采用 [LICENSE](LICENSE) 中声明的许可协议。
+感谢 [LinuxDo 社区](https://linux.do/t/topic/1167907)
