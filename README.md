@@ -22,6 +22,7 @@
 - **gencom**：根据 Git diff 生成符合项目风格的提交信息
 - **code-review-expert**：对当前代码变更进行结构化代码审查，重点关注 SOLID、架构、可删除代码与安全风险
 - **planning-with-files**：使用文件化方式组织复杂任务的计划、发现与执行进度
+- **grill-me**：持续追问用户关于计划或设计的各个方面，直到达成共识，逐条解决决策树中的每个分支
 
 ### 插件安装（仅列名称，需自行安装）
 
@@ -72,7 +73,8 @@ skills/
 │  ├─ naming/
 │  ├─ gencom/
 │  ├─ code-review-expert/
-│  └─ planning-with-files/
+│  ├─ planning-with-files/
+│  └─ grill-me/
 ├─ hooks/
 ├─ rules/
 ├─ mcp.json
