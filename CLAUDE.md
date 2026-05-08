@@ -3,124 +3,113 @@
 ## 语言和环境
 
 - **语言**: 始终使用简体中文回复（包括代码注释和 commit 信息）
-- **操作系统**: Windows 11
-- **AI终端**: Git Bash (MSYS2)
-- **用户终端**: PowerShell
-- **环境限制**: 没有 Python 环境，避免使用 Python 相关命令
-- **已安装 CLI**: 系统已安装 GitHub CLI（`gh`），涉及 GitHub 仓库操作时可以使用
+- **操作系统**: Windows 11 | **AI 终端**: Git Bash (MSYS2) | **用户终端**: PowerShell
+- **环境限制**: 无 Python 环境，避免使用 Python 相关命令
+- **已安装 CLI**: GitHub CLI（`gh`），涉及 GitHub 仓库操作时优先使用
 
 ## 权限
 
 - 拥有读取任意文件的权限，无需询问确认
 
+---
+
+## 编码原则（核心哲学）
+
+### 1. 先思考，再编码
+
+- 明确说明假设；有多种解读时，列出选项，不要悄悄选一个
+- 遇到更简单的方案，主动说出来；真正不清楚时，**停下来问**，而不是猜
+- 需求不明确 → 说清楚哪里不明确，然后问
+
+### 2. 简洁优先
+
+- 只实现被要求的功能，不写投机性代码
+- 单次使用的代码不做抽象；不要"未来可能用到"的灵活性
+- 写了 200 行但 50 行能解决 → 重写
+
+### 3. 外科手术式修改
+
+- 只改必须改的地方；不"顺手优化"无关代码
+- 保持现有代码风格，即使你会用不同写法
+- 你的改动产生的孤儿代码（无用 import/变量）→ 删掉；原有死代码 → 仅提及，不删除
+
+### 4. 目标驱动执行
+
+将任务转化为可验证的目标：
+- "修复 bug" → "写一个能复现它的测试，然后让它通过"
+- "重构 X" → "确保重构前后测试都通过"
+
+多步骤任务先列计划：
+```
+1. [步骤] → 验证: [检查点]
+2. [步骤] → 验证: [检查点]
+```
+
+---
+
 ## 命令执行策略
 
-### 1. 工具使用强制规则（绝对优先）
+### AI 自动执行（✅ 允许）
 
-**必须遵守 `~/.claude/rules/tool-usage.md` 中的规定：**
+- **文件操作**：使用专用工具（Read、Write、Edit、Glob、Grep），不用 find/grep/cat/echo 等 shell 命令
+- **Git 只读**：`git status/log/diff/branch/show/blame`
+- **GitHub 操作**：`gh pr/issue/repo/search` 等
+- **类型检查**：`npx tsc --noEmit`、`npx vue-tsc --noEmit`
+- **Git 写入规则**：详见 `~/.claude/rules/tool-usage.md`
 
-- **文件操作**：必须使用专用工具（Read、Write、Edit、Glob、Grep）
-- **Git 操作**：只允许只读命令（status、log、diff、branch、show、blame）
-- **构建/测试**：有限允许（tsc、vue-tsc）
-- **系统命令**：绝对禁止（rm、cp、mv、curl 等）
+### 提供给用户执行（PowerShell 代码块）
 
-**详细规则见：** [工具使用强制规则](~/.claude/rules/tool-usage.md)
+需要管理员权限、交互式操作、长运行进程的命令 → 给出 PowerShell 代码块，由用户手动执行
 
-### 2. 开发工具命令（AI 自动执行）
+### 绝对禁止
 
-**✅ 适用场景：**
-- Git 只读：`git status/log/diff/branch/show/blame`
-- GitHub 仓库操作：`gh pr/issue/repo/search` 等 `gh` 命令
-- 类型检查：`npx tsc --noEmit`、`npx vue-tsc --noEmit`
+- 交互式命令（文本编辑器、交互式安装向导）
+- 系统管理命令（需要管理员权限）
+- 文件操作 shell 命令（rm、cp、mv、curl 等）
 
-
-**❌ 禁止场景：**
-- 交互式命令：文本编辑器、交互式安装向导
-- 系统管理：需要管理员权限的操作
-- **文件操作命令**：find、grep、cat、echo 等（必须使用专用工具）
-
-### 3. 系统命令（提供给用户执行）
-
-需要管理员权限、交互式操作、长运行进程 → 提供 **PowerShell 代码块**给用户手动执行
+---
 
 ## 核心工作流
 
-### 开发新功能
+### 普通功能
 
-1. **规划**（复杂功能使用 `/planning-with-files`）
-2. **编码实现**
-3. **代码审查**（自动触发 `/code-review-expert`）
-4. **安全审查**（涉及敏感数据时触发 `/security-review`）
-5. **提交代码**（使用 `/gencom`）
+规划 → 编码 → `/code-review-expert` → （涉及敏感数据时）`/security-review` → `/gencom` 提交
 
+### 复杂功能 / 架构变更
 
-### 复杂功能/架构变更
+`/planning-with-files` 生成计划 → 用户确认 → 分阶段实现 → 全面审查 → `/gencom` 提交
 
-1. **规划阶段**（使用 `/planning-with-files` 生成实施计划）
-2. **用户确认**计划后再开始编码
-3. **分阶段实现**
-4. **全面审查**（`/code-review-expert` + `/security-review`）
-5. **提交代码**（使用 `/gencom`）
+### 自动触发代理
 
-## 代理使用规则
+| 代理 | 触发条件 |
+|---|---|
+| `/code-review-expert` | 写完任何代码后，立即触发（必须） |
+| `/security-review` | 涉及认证/用户输入/API/敏感数据时，提交前触发（必须） |
+| `/planning-with-files` | 复杂功能或大型重构，编码前触发（推荐） |
 
-### 自动触发（无需用户请求）
+---
 
-| 代理 | 触发条件 | 触发时机 | 优先级 |
-|------|---------|---------|--------|
-| **/code-review-expert** | 写完任何代码 | 立即 | 必须 |
-| **/security-review** | 涉及认证/用户输入/API/敏感数据 | 提交前 | 必须 |
-| **/planning-with-files** | 复杂功能/大型重构 | 编码前 | 推荐 |
-
-## 高频工具速查
-### Skills（知识库）
-
-| Skill  | 用途 |
-| ---| --- |
-| `/gencom`| 根据 Git diff 生成提交信息   |
-
-## MCP 服务使用指南
+## MCP 服务
 
 ### github（仓库管理）
 
-**工具选择：**
-- **list_*** 工具：分页检索所有项（issues、PRs、branches）
-- **search_*** 工具：关键词查询、复杂过滤条件
-- **gh CLI**：MCP 工具无法满足时，使用 `gh` 命令作为补充（如创建 PR、查看 CI 状态等）
-
-**使用规范：**
+- `list_*`：分页检索所有项；`search_*`：关键词/复杂过滤
 - 必须先调用 `get_me` 了解当前用户权限
-- 使用 `sort` 和 `order` 参数排序，不要在查询字符串中包含 `sort:` 语法
-- 查询字符串只包含搜索条件（如 `org:google language:python`）
-- `gh` 命令需确认后执行写入操作（create、delete、merge 等）
+- 查询字符串只含搜索条件，`sort`/`order` 用参数传，不写在字符串里
+- `gh` 命令：MCP 工具不够用时补充；写入操作（create/delete/merge）需用户确认
 
-### exa（AI 搜索，优先用于获取最新信息）
+### exa（AI 搜索）
 
-**工具选择：**
-- **web_search_exa**：快速搜索当前信息
-- **deep_researcher_start + deep_researcher_check**：深度研究报告（15秒-2分钟）
-- **get_code_context_exa**：查找代码示例、API 文档、库用法
-
-**使用场景：**
-- 获取 2025 年后的最新技术信息
-- 查找最佳实践和代码示例
-- 研究新框架/库的使用方法
+- `web_search_exa`：快速搜索 | `deep_researcher_start/check`：深度研究报告
+- `get_code_context_exa`：代码示例、API 文档、库用法
+- 优先用于获取 2025 年后的最新技术信息
 
 ### fetch（网页抓取）
 
-**功能：** 抓取公开网页内容并转换为 Markdown
+- 抓取公开网页并转为 Markdown
+- ❌ 不支持需认证的服务 → 改用对应 MCP 工具（如 github MCP）
 
-**限制：** ❌ 不支持需要认证的服务（Google Docs、Confluence、Jira、GitHub 私有仓库）
-
-**替代方案：** 需要认证的服务使用对应的 MCP 工具（如 github MCP）
-
-### chrome-devtools（浏览器自动化）
-
-**功能：**
-- **页面测试**：自动化测试、表单填写、点击操作
-- **性能分析**：Lighthouse 审计、性能追踪、Core Web Vitals 测量
-- **调试辅助**：控制台消息监控、网络请求分析
-- **页面操作**：截图、快照、元素检查
+---
 
 ## 工作原则
 
@@ -128,16 +117,7 @@
 - 优先编辑现有文件，不创建新文件
 - 使用 TodoWrite 跟踪多步骤任务
 
-## 错误处理策略
+## 错误处理
 
-### 工具调用失败
-
-1. **分析错误消息**，理解失败原因
-2. **尝试替代方案**（如 Glob 失败 → 尝试 Grep）
-3. **重复失败 3 次** → 向用户说明情况并请求指导
-
-### 构建/测试失败
-
-1. **增量修复**（一次处理一个错误）
-2. **每次修复后验证**，确保问题解决
-
+- **工具失败**：分析原因 → 尝试替代方案（Glob 失败 → 试 Grep）→ 连续失败 3 次向用户说明
+- **构建/测试失败**：增量修复，一次处理一个错误，每次修复后验证
