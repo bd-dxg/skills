@@ -98,11 +98,19 @@
 - 查询字符串只含搜索条件，`sort`/`order` 用参数传，不写在字符串里
 - `gh` 命令：MCP 工具不够用时补充；写入操作（create/delete/merge）需用户确认
 
-### exa（AI 搜索）
+### tavily-remote-mcp（网络搜索，优先使用）
+
+- `tavily_search`：快速网页搜索，**网络搜索时优先使用**
+- `tavily_crawl`：网页爬取
+- `tavily_extract`：内容提取
+- `tavily_map`：站点地图
+- `tavily_research`：深度研究
+
+### exa（AI 搜索，备选）
 
 - `web_search_exa`：快速搜索 | `deep_researcher_start/check`：深度研究报告
 - `get_code_context_exa`：代码示例、API 文档、库用法
-- 优先用于获取 2025 年后的最新技术信息
+- tavily 不可用或需代码上下文搜索时使用
 
 ### fetch（网页抓取）
 

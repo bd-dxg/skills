@@ -19,5 +19,9 @@
     },
     "type": "sse",
     "url": "https://mcp.api-inference.modelscope.net/申请密钥/sse"
+  },
+  "tavily-remote-mcp": {
+      "type": "http",
+      "url": "https://mcp.tavily.com/mcp/"
   }
 }
