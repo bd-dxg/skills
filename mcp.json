@@ -8,18 +8,6 @@
     ],
     "command": "npx"
   },
-  "exa": {
-    "headers": {},
-    "type": "http",
-    "url": "https://mcp.exa.ai/mcp?tools=web_search_exa,get_code_context_exa,crawling_exa,company_research_exa,linkedin_search_exa,deep_researcher_start,deep_researcher_check"
-  },
-  "fetch": {
-    "headers": {
-      "Authorization": "Bearer 申请密钥https://www.modelscope.cn/my/access/token"
-    },
-    "type": "sse",
-    "url": "https://mcp.api-inference.modelscope.net/申请密钥/sse"
-  },
   "tavily-remote-mcp": {
       "type": "http",
       "url": "https://mcp.tavily.com/mcp/"
