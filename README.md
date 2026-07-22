@@ -42,10 +42,6 @@
 - **skill-creator**：用于创建新的 Claude Code skill，辅助生成所需结构与内容。
 - **typescript-lsp**：提供 TypeScript 语言服务相关能力，便于处理类型信息、符号定位与代码理解。
 
-#### hello2cc
-
-- **hello2cc**：让第三方模型在 Claude Code 里尽量按 Opus 一样思考、运行、选工具和输出。仓库地址：<https://github.com/hellowind777/hello2cc>
-
 #### vue-skills
 
 - **vue-best-practices**：Vue 通用最佳实践，覆盖 Vue 3、Composition API、`<script setup>`、TypeScript 等推荐用法。
@@ -76,7 +72,6 @@ skills/
 │  ├─ planning-with-files/
 │  └─ grill-me/
 ├─ hooks/
-├─ rules/
 ├─ mcp.json
 └─ settings.json
 ```
@@ -95,9 +90,6 @@ skills/
 
 - **vscode-notify.ps1**：Windows 系统下的 VSCode 通知脚本，当 Claude Code 需要用户交互时（如权限确认、问题回答等），通过 Windows Toast 通知提醒用户。
 
-### `rules/`
-
-存放规则文件，用于约束 Claude Code 的输出风格、代码规范与执行习惯。
 
 ### `settings.json`
 
@@ -105,7 +97,7 @@ Claude Code 的本地配置入口，用于注册 hooks、rules 以及其他个�
 
 ### `mcp.json`
 
-用于存放 MCP 服务配置示例，例如 `chrome-devtools-mcp`、`exa`、`fetch` 等服务端点或启动参数。
+用于存放 MCP 服务配置示例，例如 `chrome-devtools`、`tavily-remote-mcp` 等服务端点或启动参数。
 
 > [!IMPORTANT]
 > `mcp.json` 通常不是直接给仓库本身加载的，而是作为**示例配置**使用。
