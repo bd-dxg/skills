@@ -2,9 +2,9 @@
 
 ## 语言和环境
 
-- **语言**: 始终使用简体中文回复（包括代码注释和 commit 信息）
+- **语言**: 所有输出（包括思考过程、回复、代码注释和 commit 信息）一律使用简体中文
 - **操作系统**: Windows 11 | **AI 终端**: Git Bash (MSYS2) | **用户终端**: PowerShell
-- **环境限制**: 无 Python 环境，避免使用 Python 相关命令
+- **环境限制**: 无 Python 环境，避免使用 Python 相关命令 和 脚本
 - **已安装 CLI**: GitHub CLI（`gh`），涉及 GitHub 仓库操作时优先使用
 
 ## 权限
@@ -40,7 +40,7 @@
 
 多步骤任务先列计划：
 
-```
+```text
 1. [步骤] → 验证: [检查点]
 2. [步骤] → 验证: [检查点]
 ```
@@ -69,7 +69,7 @@
 
 ### 普通功能
 
-规划 → 编码 → `/code-review-expert` → （涉及敏感数据时）`/security-review` → `/gencom` 提交
+规划 → 编码 → `/code-review-expert` → `/gencom` 提交
 
 ### 复杂功能 / 架构变更
 
@@ -77,27 +77,20 @@
 
 ### 自动触发代理
 
-| 代理                   | 触发条件                                             |
-| ---------------------- | ---------------------------------------------------- |
-| `/code-review-expert`  | 写完任何代码后，立即触发（必须）                     |
-| `/security-review`     | 涉及认证/用户输入/API/敏感数据时，提交前触发（必须） |
-| `/planning-with-files` | 复杂功能或大型重构，编码前触发（推荐）               |
+| 代理                   | 触发条件                               |
+| ---------------------- | -------------------------------------- |
+| `/code-review-expert`  | 写完任何代码后，立即触发（必须）       |
+| `/planning-with-files` | 复杂功能或大型重构，编码前触发（推荐） |
 
-## MCP 服务
+## MCP
 
-### tavily-remote-mcp（网络搜索，优先使用）
-
-- `tavily_search`：快速网页搜索，**网络搜索时优先使用**
-- `tavily_crawl`：网页爬取
-- `tavily_extract`：内容提取
-- `tavily_map`：站点地图
-- `tavily_research`：深度研究
+- Use tavily-remote-mcp for web search (current information, news, facts).
+- Use searchcode to search and analyze public git repositories.
 
 ## 工作原则
 
-- 优先查阅项目级 CLAUDE.md
+- 优先查阅项目级 `CLAUDE.md`或者`AGENTS.md`
 - 优先编辑现有文件，不创建新文件
-- 使用 TodoWrite 跟踪多步骤任务
 
 ## 错误处理
 
