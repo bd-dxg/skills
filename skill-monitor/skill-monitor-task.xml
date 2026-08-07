@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-16"?>
+<Task version="1.4" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
+  <RegistrationInfo><Date>2026-08-04T00:00:00</Date><Author>User</Author></RegistrationInfo>
+  <Triggers>
+    <LogonTrigger><Delay>PT30M</Delay><Enabled>true</Enabled></LogonTrigger>
+    <CalendarTrigger><StartBoundary>2026-08-04T09:00:00</StartBoundary><Enabled>true</Enabled><ScheduleByDay><DaysInterval>1</DaysInterval></ScheduleByDay></CalendarTrigger>
+  </Triggers>
+  <Settings><StartWhenAvailable>true</StartWhenAvailable><DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries><StopIfGoingOnBatteries>false</StopIfGoingOnBatteries><ExecutionTimeLimit>PT15M</ExecutionTimeLimit></Settings>
+  <Actions Context="Author"><Exec><Command>powershell.exe</Command><Arguments>-NoProfile -ExecutionPolicy Bypass -File "C:\Users\bddxg\.agents\skills\skill-monitor\scripts\check-updates.ps1"</Arguments></Exec></Actions>
+</Task>
