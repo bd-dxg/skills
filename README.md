@@ -85,4 +85,4 @@ MCP 服务配置示例，例如 `chrome-devtools`、`tavily-remote-mcp` 等服�
 ## License
 
 本仓库采用 [LICENSE](LICENSE) 中声明的许可协议。
-感谢 [LinuxDo 社区](https://linux.do/t/topic/1167907)
+感谢 [LinuxDo 社区](https://linux.do)
