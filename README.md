@@ -26,7 +26,7 @@
 | **find-skills** | 技能发现与安装助手，当用户询问"怎么实现 X""有没有相关的 skill"时自动触发 |
 | **gencom** | 根据 Git diff 生成符合项目风格的提交信息 |
 | **github-issue-creator** | 创建 GitHub Issue，支持 bug/feature 等多种类型，自动匹配仓库模板与标签 |
-| **grill-me** | 持续追问用户关于计划或设计的各个方面，直到达成共识，逐条解决决策树中的每个分支 |
+| **grill-me-docs-standalone** | 对方案进行结构化深度追问，同时在对话中同步生成 `CONTEXT.md` 术语表和 ADR 架构决策记录 |
 | **humanizer-zh** | 去除文本中的 AI 生成痕迹，使内容听起来更自然、更像人类书写 |
 | **init-agents-md** | 扫描项目结构并初始化项目级 `AGENTS.md`（context file），适合新仓库快速上手 |
 | **naming** | 根据中文描述生成简洁、自然的英文标识符（PascalCase） |
@@ -46,7 +46,7 @@ skills/
 ├─ find-skills/
 ├─ gencom/
 ├─ github-issue-creator/
-├─ grill-me/
+├─ grill-me-docs-standalone/
 ├─ humanizer-zh/
 ├─ init-agents-md/
 ├─ naming/
