@@ -35,6 +35,7 @@
 | **pr-creator** | 创建符合仓库规范的 Pull Request，自动匹配模板与标准 |
 | **skill-creator** | 创建、修改和优化 Claude Code skill，支持评估、基准测试与描述优化 |
 | **skill-monitor** | 用 GitHub URL 持续监控远程仓库文件变更，不依赖 `npx skills` 安装 |
+| **todo-list** | 个人待办（todolist）增删改查，支持项目/子任务多级嵌套、父级进度自动汇总、软删除回收站 |
 
 ## 仓库结构
 
@@ -55,6 +56,7 @@ skills/
 ├─ pr-creator/
 ├─ skill-creator/
 ├─ skill-monitor/
+├─ todo-list/
 ├─ CLAUDE.md
 └─ mcp.json
 ```
