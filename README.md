@@ -26,16 +26,17 @@
 | **find-skills** | 技能发现与安装助手，当用户询问"怎么实现 X""有没有相关的 skill"时自动触发 |
 | **gencom** | 根据 Git diff 生成符合项目风格的提交信息 |
 | **github-issue-creator** | 创建 GitHub Issue，支持 bug/feature 等多种类型，自动匹配仓库模板与标签 |
-| **grill-me-docs-standalone** | 对方案进行结构化深度追问，同时在对话中同步生成 `CONTEXT.md` 术语表和 ADR 架构决策记录 |
+| **grill-me** | 以设计树 + frontier 分轮追问的方式对方案做深度压力测试，直到达成共识 |
 | **humanizer-zh** | 去除文本中的 AI 生成痕迹，使内容听起来更自然、更像人类书写 |
 | **init-agents-md** | 扫描项目结构并初始化项目级 `AGENTS.md`（context file），适合新仓库快速上手 |
 | **naming** | 根据中文描述生成简洁、自然的英文标识符（PascalCase） |
-| **planning-with-files** | 使用文件化方式组织复杂任务的计划、发现与执行进度，支持会话恢复 |
 | **pr-address-comments** | 处理 GitHub PR 上的 Review 评论，自动修复被指出的问题 |
 | **pr-creator** | 创建符合仓库规范的 Pull Request，自动匹配模板与标准 |
 | **skill-creator** | 创建、修改和优化 Claude Code skill，支持评估、基准测试与描述优化 |
 | **skill-monitor** | 用 GitHub URL 持续监控远程仓库文件变更，不依赖 `npx skills` 安装 |
-| **todo-list** | 个人待办（todolist）增删改查，支持项目/子任务多级嵌套、父级进度自动汇总、软删除回收站 |
+
+> [!NOTE]
+> `planning-with-files` 已改为通过 npm 包独立安装，不再在本仓库维护副本。
 
 ## 仓库结构
 
@@ -47,17 +48,15 @@ skills/
 ├─ find-skills/
 ├─ gencom/
 ├─ github-issue-creator/
-├─ grill-me-docs-standalone/
+├─ grill-me/
 ├─ humanizer-zh/
 ├─ init-agents-md/
 ├─ naming/
-├─ planning-with-files/
 ├─ pr-address-comments/
 ├─ pr-creator/
 ├─ skill-creator/
 ├─ skill-monitor/
-├─ todo-list/
-├─ CLAUDE.md
+├─ AGENTS.md
 └─ mcp.json
 ```
 
@@ -67,13 +66,16 @@ skills/
 
 每个 skill 独立为一个目录，内含 `SKILL.md`（技能定义与使用指南）及相关资源文件。各 Agent 会自动扫描并加载这些 skill。
 
-### `CLAUDE.md`
+### `AGENTS.md`
 
-全局配置与规则文件，定义工具使用规则、编码原则、MCP 优先级等。
+全局配置与规则文件，定义工具使用规则、编码原则、核心工作流与自动触发技能等。
 
 ### `mcp.json`
 
-MCP 服务配置示例，例如 `chrome-devtools`、`tavily-remote-mcp` 等服务端点或启动参数。
+MCP 服务配置，采用 `settings` + `mcpServers` 结构，包含 `chrome-devtools`、`searchcode`、`tavily-remote-mcp`、`reqable` 四个服务。
+
+> [!WARNING]
+> 配置中的 API Key 使用 `<YOUR_TAVILY_API_KEY>` 占位符，使用前请替换为你自己的密钥，且不要把真实密钥提交到仓库。
 
 ## 使用说明
 
@@ -82,7 +84,7 @@ MCP 服务配置示例，例如 `chrome-devtools`、`tavily-remote-mcp` 等服�
 - 直接复用已有 skills
 - 在现有 skills 基础上继续调整
 - 新增更适合自己项目的自定义 skills
-- 结合 `CLAUDE.md`、`mcp.json` 等配置文件组织自己的 Claude Code 工作流
+- 结合 `AGENTS.md`、`mcp.json` 等配置文件组织自己的 Agent 工作流
 
 ## License
 
