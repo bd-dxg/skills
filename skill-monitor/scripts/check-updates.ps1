@@ -1,4 +1,4 @@
-# check-updates.ps1
+﻿# check-updates.ps1
 # skill-monitor 自动检查脚本（供 Windows 计划任务或手动调用）
 # 读取 ~/.skill-monitor/monitor.json，对每条 watch 用 GitHub API 对比 blob sha，
 # 发现变化则下载新版本、生成变更摘要报告（reports/<日期>/<watch-id>.md），
@@ -10,14 +10,28 @@ $ErrorActionPreference = 'Stop'
 $DataDir    = Join-Path $env:USERPROFILE '.skill-monitor'
 $Manifest   = Join-Path $DataDir 'monitor.json'
 $ReportsDir = Join-Path $DataDir 'reports'
+$LogsDir    = Join-Path $DataDir 'logs'
+
+# 日志路径：logs/check-<日期>.log
+New-Item -ItemType Directory -Force -Path $LogsDir | Out-Null
+$LogFile = Join-Path $LogsDir ("check-" + (Get-Date -Format 'yyyy-MM-dd') + ".log")
+
+function Log-Write {
+    param([string]$Msg)
+    $line = "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] $Msg"
+    Add-Content -Path $LogFile -Value $line -Encoding UTF8
+    Write-Host $Msg
+}
 
 if (-not (Test-Path $Manifest)) {
-    Write-Host "monitor.json 不存在（$Manifest），跳过检查"
+    Log-Write "monitor.json 不存在（$Manifest），跳过检查"
     exit 0
 }
 
 # 确保报告目录存在
 New-Item -ItemType Directory -Force -Path $ReportsDir | Out-Null
+
+Log-Write '=== skill-monitor 检查开始 ==='
 
 # ---------- 网络就绪检测 ----------
 # 计划任务可能开机后立即运行而网络未就绪；探测失败则每 60 秒重试，最多 6 次（约 5 分钟）
@@ -26,7 +40,8 @@ function Wait-NetworkReady {
     $attempt = 0
     while ($attempt -lt $maxAttempts) {
         try {
-            Invoke-WebRequest -Uri 'https://api.github.com' -Method Head `
+            # PS 5.1 非交互模式下 Invoke-WebRequest 会抛空引用异常，改用 Invoke-RestMethod
+            Invoke-RestMethod -Uri 'https://api.github.com' `
                 -Headers @{ 'User-Agent' = 'skill-monitor' } -TimeoutSec 10 | Out-Null
             return $true
         }
@@ -35,12 +50,12 @@ function Wait-NetworkReady {
             if ($_.Exception.Response) { return $true }
             $attempt++
             if ($attempt -lt $maxAttempts) {
-                Write-Host "网络未就绪（第 $attempt 次尝试失败），60 秒后重试..." -ForegroundColor Yellow
+                Log-Write "网络未就绪（第 $attempt 次尝试失败），60 秒后重试..."
                 Start-Sleep -Seconds 60
             }
         }
     }
-    Write-Host '网络探测失败，跳过本次检查' -ForegroundColor Yellow
+    Log-Write '网络探测失败，跳过本次检查'
     return $false
 }
 
@@ -142,12 +157,12 @@ foreach ($w in $watches) {
     $ref  = $w.ref
     $localDir = $w.local_dir
 
-    Write-Host "==> 检查 $id ($repo/$path)"
+    Log-Write "==> 检查 $id ($repo/$path)"
     try {
         $remote = Get-RemoteFiles -Repo $repo -Path $path -Ref $ref
     }
     catch {
-        Write-Host "    获取远端文件失败: $($_.Exception.Message)" -ForegroundColor Yellow
+        Log-Write "    获取远端文件失败: $($_.Exception.Message)"
         continue
     }
 
@@ -164,12 +179,12 @@ foreach ($w in $watches) {
     }
 
     if ($modified.Count -eq 0 -and $added.Count -eq 0 -and $deleted.Count -eq 0) {
-        Write-Host "    无更新"
+        Log-Write "    无更新"
         continue
     }
 
     $changed = $true
-    Write-Host "    发现更新: 修改 $($modified.Count) / 新增 $($added.Count) / 删除 $($deleted.Count)"
+    Log-Write "    发现更新: 修改 $($modified.Count) / 新增 $($added.Count) / 删除 $($deleted.Count)"
 
     # 下载新版本到临时目录
     $tmpDir = Join-Path $env:TEMP "skill-monitor-$id-$(Get-Random)"
@@ -222,7 +237,7 @@ foreach ($w in $watches) {
     New-Item -ItemType Directory -Force -Path $reportPath | Out-Null
     $reportFile = Join-Path $reportPath "$id.md"
     [System.IO.File]::WriteAllLines($reportFile, $report, [System.Text.Encoding]::UTF8)
-    Write-Host "    报告已生成: $reportFile"
+    Log-Write "    报告已生成: $reportFile"
 
     # 更新 sha 记录并写回 manifest（无人值守：同一更新只报告一次）
     $w.files = [ordered]@{}
@@ -236,5 +251,7 @@ foreach ($w in $watches) {
 }
 
 if (-not $changed) {
-    Write-Host "所有监控项均无更新（$today）"
+    Log-Write "所有监控项均无更新（$today）"
 }
+
+Log-Write '=== 检查完成 ==='
